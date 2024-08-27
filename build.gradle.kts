@@ -43,7 +43,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
 
     //mybatis연결(@Mapper도 영향)
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
 
     //json
     implementation("com.googlecode.json-simple:json-simple:1.1.1")

@@ -1,6 +1,7 @@
 package com.steamchk.ekeprl.www.common.service
 
 import com.steamchk.ekeprl.www.common.mapper.CommonMapper
+import com.steamchk.ekeprl.www.common.model.JoinReq
 import jakarta.servlet.http.HttpSession
 import org.json.simple.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
