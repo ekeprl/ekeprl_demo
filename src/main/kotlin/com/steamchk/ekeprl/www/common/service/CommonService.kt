@@ -28,20 +28,20 @@ class CommonService {
 
         var jsono = JSONObject()
         try {
-            val dulpiChk = mapper.joinduplicateChl(userid)
+            val dulpiChk = mapper.joinduplicateChk(userid)
             if (dulpiChk > 0) {
                 // 중복된 값이 있는 경우
-                jsono.put("status", "error")
-                jsono.put("message", "사용중인 ID입니다.")
+                jsono.put("RESULT", "ERR")
+                jsono.put("MESSAGE", "$userid 는 사용중인 ID입니다.")
             } else {
                 // 중복된 값이 없는 경우
-                jsono.put("status", "success")
-                jsono.put("message", "사용 가능한 ID입니다.")
+                jsono.put("RESULT", "OK")
+                jsono.put("MESSAGE", "사용 가능한 ID입니다.")
             }
         } catch (e: Exception) {
             // 예외 처리
-            jsono.put("status", "error")
-            jsono.put("message", "An error occurred: ${e.message}")
+            jsono.put("RESULT", "error")
+            jsono.put("MESSAGE", "An error occurred: ${e.message}")
         }
 
         return jsono

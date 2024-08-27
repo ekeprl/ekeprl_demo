@@ -3,12 +3,12 @@
 <mapper namespace="com.steamchk.ekeprl.www.common.mapper.CommonMapper">
 
 
-    <select id="joinduplicateChl"                       parameterType="String"
+    <select id="joinduplicateChk"                       parameterType="String"
                                                         resultType="Int">
         SELECT COUNT(*)
         FROM MEMBER
         WHERE
-            USERID = #{userid}
+            ID = #{userid}
     </select>
 
 

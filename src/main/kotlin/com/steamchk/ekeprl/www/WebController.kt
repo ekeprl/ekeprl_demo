@@ -9,6 +9,10 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 class WebController() {
@@ -26,19 +30,6 @@ class WebController() {
         return "/hello"
     }
 
-    @GetMapping("/test-db")
-    fun testDbConnection(model: Model): String {
-        // 간단한 쿼리를 실행해 봅니다.
-        val result = jdbcTemplate.queryForObject("SELECT 1", Int::class.java)
-
-        // 결과를 모델에 추가합니다.
-        model.addAttribute("result", result)
-
-        // "test-db.html" 뷰를 반환합니다.
-        return "test-db"
-    }
-
-
     @GetMapping("/login")
     fun login(session: HttpSession, model: Model): String {
         return service.webLoginPage(session, model)
@@ -53,8 +44,9 @@ class WebController() {
     }
 
     //회원가입 설정
-    @GetMapping("/join-duplicateChk")
-    fun joinduplicateChk(userid : String): JSONObject {
+    @ResponseBody
+    @RequestMapping(value = [("/join-duplicateChk")], method = [(RequestMethod.POST)])
+    fun joinduplicateChk(@RequestParam("userid") userid : String): JSONObject {
         return service.joinDulpicateChk(userid)
     }
 

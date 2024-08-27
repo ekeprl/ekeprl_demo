@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper
 @Mapper
 interface CommonMapper {
 
-    fun joinduplicateChl(userid : String) : Int
+    fun joinduplicateChk(userid : String) : Int
 
 }
