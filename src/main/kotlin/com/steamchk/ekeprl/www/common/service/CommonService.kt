@@ -1,16 +1,21 @@
 package com.steamchk.ekeprl.www.common.service
 
 import com.steamchk.ekeprl.www.common.mapper.CommonMapper
-import com.steamchk.ekeprl.www.common.model.JoinReq
 import jakarta.servlet.http.HttpSession
+import org.apache.ibatis.annotations.Param
 import org.json.simple.JSONObject
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.ui.Model
+import kotlin.jvm.Throws
 
 @Service
 
 class CommonService {
+
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Autowired
     private lateinit var mapper : CommonMapper
@@ -22,6 +27,29 @@ class CommonService {
         var result = "/login"
 
         return result
+    }
+
+
+    //로그인 시도
+    fun logtry(@Param("userid") userid: String,@Param("userpw") userpw: String) : String {
+        var result = "redirect:/login"
+
+        try {
+            val userinfo = mapper.getuserinfo(userid)
+
+            if(userinfo === null) {
+               logger.error("존재하지 않는 아이디입니다. 다시 입력해주세요.")
+            }else if(userinfo.userpw != userpw){
+               logger.error("잘못된 비밀번호입니다. 다시 입력해주세요.")
+            }else{
+                result = "redirect:/main"
+            }
+        }catch (e : Exception) {
+            logger.error("ERROR", e)
+        }
+        return result
+
+
     }
 
     //회원가입 중복 조회
@@ -49,7 +77,27 @@ class CommonService {
 
     }
 
+    //회원등록
+    @Throws(Exception :: class)
+    @Transactional(rollbackFor = [(Exception::class)])
+    fun joinsubmit(userid: String, userpw: String, email:String) : JSONObject{
 
+        var jsono = JSONObject()
+        try {
+
+            mapper.joinsubmit(userid, userpw, email)
+
+            jsono["RESULT"] = "OK"
+            jsono["MESSAGE"] = "회원가입이 완료되었습니다."
+
+        } catch (e : Exception){
+            logger.error("ERROR : " + e)
+            jsono["RESULT"] = "ERROR"
+            jsono["MESSAGE"] = "회원가입에 실패했습니다."
+        }
+        return  jsono
+
+    }
 
 
 }

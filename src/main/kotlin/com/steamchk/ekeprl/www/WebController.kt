@@ -24,31 +24,47 @@ class WebController() {
     @Autowired
     lateinit var service: CommonService
 
-    @GetMapping("/helloo")
+    //로그인 페이지
+    @RequestMapping(value = [("/login")])
     @Throws(Exception::class)
-    fun hello(): String {
-        return "/hello"
-    }
-
-    @GetMapping("/login")
     fun login(session: HttpSession, model: Model): String {
-        return service.webLoginPage(session, model)
+        /*return service.webLoginPage(session, model)*/
+        return "login"
     }
 
+    //로그인 페이지
+    @RequestMapping(value = [("/login-try")] , method = [(RequestMethod.POST)])
+    @Throws(Exception::class)
+    fun logintry(userid: String, userpw: String): String {
+        return service.logtry(userid, userpw)
+
+    }
 
 
     //회원가입 설정
-    @GetMapping("/join")
+    @RequestMapping(value = [("/join")], method = [(RequestMethod.POST)])
     fun join(session: HttpSession, model: Model): String {
         return "join"
+
     }
 
-    //회원가입 설정
+    //회원가입 - 아이디중복체크
     @ResponseBody
     @RequestMapping(value = [("/join-duplicateChk")], method = [(RequestMethod.POST)])
     fun joinduplicateChk(@RequestParam("userid") userid : String): JSONObject {
         return service.joinDulpicateChk(userid)
     }
+
+    //회원등록
+    @ResponseBody
+    @RequestMapping(value = [("/join-submit")], method = [(RequestMethod.POST)])
+    @Throws(Exception::class)
+    fun joinsubmit(@RequestParam("userid") userid : String,
+                   @RequestParam("userpw") userpw : String,
+                   @RequestParam("email") email : String): JSONObject {
+        return service.joinsubmit(userid, userpw, email)
+    }
+
 
 
 }
