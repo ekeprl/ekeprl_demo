@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- root logger 설정 -->
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+
+    <!-- 각 패키지에 대한 logger 설정 -->
+    <logger name="jdbc" level="OFF" />
+    <logger name="jdbc.audit" level="OFF" />
+    <logger name="jdbc.sqlonly" level="OFF" />
+    <logger name="io.undertow" level="WARN" />
+    <logger name="jdbc.resultset" level="OFF" />
+    <logger name="jdbc.connection" level="OFF" />
+    <logger name="io.netty" level="WARN" additivity="false" />
+    <logger name="io.lettuce" level="WARN" additivity="false" />
+    <logger name="org.xnio.nio" level="WARN" additivity="false" />
+    <logger name="org.thymeleaf" level="WARN" additivity="false" />
+    <logger name="com.zaxxer.hikari" level="WARN" additivity="false" />
+    <logger name="org.mybatis.spring" level="WARN" additivity="false" />
+    <logger name="org.springframework" level="WARN" additivity="false" />
+
+
+</configuration>
