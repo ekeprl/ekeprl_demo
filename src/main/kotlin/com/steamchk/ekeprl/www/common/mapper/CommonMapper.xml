@@ -2,14 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.steamchk.ekeprl.www.common.mapper.CommonMapper">
 
-    <select id="loginChk"                       parameterType="String"
-                                                resultType="com.steamchk.ekeprl.www.common.model.LoginModel">
+    <select id="getuserinfo"                        parameterType="String"
+                                                    resultType="com.steamchk.ekeprl.www.common.model.LoginModel">
+        /*CommonMapper.getuserinfo*/
         SELECT
-            ID      AS USERID
-            ,PW     AS USERPW
-            ,EMAIL  AS USEREMAIL
-            ,NM     AS USERNM
-            ,MEMCODE AS MEMCODE
+            ID      AS userid
+            ,PW     AS userpw
+            ,EMAIL  AS useremail
+            ,NM     AS usernm
+            ,MEMCODE AS memcode
         FROM MEMBER
         WHERE
             ID = #{userid}
@@ -28,10 +29,12 @@
 
     <insert id="joinsubmit"                             parameterType="String">
         INSERT INTO MEMBER (MEMCODE,ID, PW, EMAIL, REGDT , UPDDT)
-        VALUES (fn_getmemcode() ,#{userid} , #{userpw}, #{email}, NOW(), NOW())
+        VALUES (fn_getmemcode() ,#{userid} , #{userpw}, #{useremail}, NOW(), NOW())
 
 
     </insert>
+
+
 
 
 </mapper>

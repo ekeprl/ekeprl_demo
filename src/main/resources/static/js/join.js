@@ -6,9 +6,9 @@ doc.addEventListener('DOMContentLoaded', function(){
 });
 
 var userid = doc.getElementById('userid');
-var userpw = doc.getElementById('password');
+var userpw = doc.getElementById('userpw');
 var confirm_password = doc.getElementById('confirm_password');
-var email = doc.getElementById('email');
+var useremail = doc.getElementById('useremail');
 
 var join_duplicateBtn = doc.getElementById('checkDuplicateBtn');
 
@@ -35,17 +35,6 @@ var JoinJsFun = {
             JoinJsFun.submitChk();
 
         });
-
-
-        email.addEventListener("keyup", function (){
-            util.inputEmailform(this);
-        })
-
-        userpw.addEventListener("keyup", function (){
-            util.inputPwform(this);
-        })
-
-
 
     },
 
@@ -93,7 +82,7 @@ var JoinJsFun = {
 
         if(isduplicate === false ) {
             alert("아이디 중복체크를 완료해주세요.");
-        }else if(!email.value){
+        }else if(!useremail.value){
             alert("이메일을 입력해주세요.");
         }else if(!userpw.value){
             alert("비밀번호를 입력해주세요.");
@@ -103,7 +92,7 @@ var JoinJsFun = {
             var fd = new FormData();
             fd.append('userid', userid.value);
             fd.append('userpw', userpw.value);
-            fd.append('email', email.value);
+            fd.append('useremail', useremail.value);
 
 
             var xhr = new XMLHttpRequest();
@@ -113,16 +102,19 @@ var JoinJsFun = {
             xhr.setRequestHeader('Cache-Control', 'no-cache, must-revalidate');
             xhr.onload = function () {
                 if (xhr.status === 200) { // 응답이 성공적으로 완료된 경우
-                    alert("회원가입이 완료되었습니다.")
+                    alert("회원가입이 완료되었습니다.");
                     window.location.href = '/login';
-                    }else{
-                    alert("회원가입에 실패했습니다. 다시 시도해주세요.")
+                } else {
+                    alert("회원가입에 실패했습니다. 다시 시도해주세요.");
                 }
+            };
 
-                }
-            }
-            xhr.onerror = function() { alert('ERROR : ' + xhr.status); };
-            xhr.send(fd);
+            xhr.onerror = function() {
+                alert('ERROR : ' + xhr.status);
+            };
+
+            xhr.send(fd); // xhr.onload와 xhr.onerror 설정 후에 호출
+        }
 
     },
 

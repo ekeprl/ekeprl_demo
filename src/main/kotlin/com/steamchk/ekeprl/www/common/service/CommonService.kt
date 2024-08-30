@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.ui.Model
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import kotlin.jvm.Throws
 
 @Service
@@ -31,18 +32,20 @@ class CommonService {
 
 
     //로그인 시도
-    fun logtry(@Param("userid") userid: String,@Param("userpw") userpw: String) : String {
+    fun logtry(redirectAttributes: RedirectAttributes,
+               @Param("userid") userid: String, @Param("userpw") userpw: String) : String {
         var result = "redirect:/login"
 
         try {
             val userinfo = mapper.getuserinfo(userid)
-
-            if(userinfo === null) {
-               logger.error("존재하지 않는 아이디입니다. 다시 입력해주세요.")
+            logger.info("확인123213 : " + userinfo!!.userpw);
+            if(userinfo == null) {
+            redirectAttributes.addFlashAttribute("MESSAGE", "계정 정보가 존재 하지 않습니다.")
             }else if(userinfo.userpw != userpw){
-               logger.error("잘못된 비밀번호입니다. 다시 입력해주세요.")
+            logger.info("DB에서 가져온 비밀번호: ${userinfo.userpw}, 입력한 비밀번호: $userpw")
+            redirectAttributes.addFlashAttribute("ERROR", "비밀번호가 일치 하지 않습니다.")
             }else{
-                result = "redirect:/main"
+            result = "redirect:/main"
             }
         }catch (e : Exception) {
             logger.error("ERROR", e)
@@ -80,12 +83,12 @@ class CommonService {
     //회원등록
     @Throws(Exception :: class)
     @Transactional(rollbackFor = [(Exception::class)])
-    fun joinsubmit(userid: String, userpw: String, email:String) : JSONObject{
+    fun joinsubmit(userid: String, userpw: String, useremail:String) : JSONObject{
 
         var jsono = JSONObject()
         try {
 
-            mapper.joinsubmit(userid, userpw, email)
+            mapper.joinsubmit(userid, userpw, useremail)
 
             jsono["RESULT"] = "OK"
             jsono["MESSAGE"] = "회원가입이 완료되었습니다."

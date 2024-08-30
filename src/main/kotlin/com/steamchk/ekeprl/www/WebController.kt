@@ -3,6 +3,7 @@ package com.steamchk.ekeprl.www
 
 import com.steamchk.ekeprl.www.common.service.CommonService
 import jakarta.servlet.http.HttpSession
+import org.apache.ibatis.annotations.Param
 import org.json.simple.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 @Controller
 class WebController() {
@@ -24,6 +26,16 @@ class WebController() {
     @Autowired
     lateinit var service: CommonService
 
+    //메인페이지 이동
+
+    @RequestMapping(value = [("/main")])
+    @Throws(Exception::class)
+    fun mainPage(): String {
+    return "main"
+    }
+
+
+
     //로그인 페이지
     @RequestMapping(value = [("/login")])
     @Throws(Exception::class)
@@ -33,10 +45,12 @@ class WebController() {
     }
 
     //로그인 페이지
-    @RequestMapping(value = [("/login-try")] , method = [(RequestMethod.POST)])
+    @RequestMapping(value = [("login-try")] , method = [(RequestMethod.POST)])
     @Throws(Exception::class)
-    fun logintry(userid: String, userpw: String): String {
-        return service.logtry(userid, userpw)
+    fun logintry(redirectAttributes: RedirectAttributes,
+                 @Param("userid") userid: String,
+                 @Param("userpw") userpw: String): String {
+        return service.logtry(redirectAttributes,userid, userpw)
 
     }
 
@@ -61,8 +75,8 @@ class WebController() {
     @Throws(Exception::class)
     fun joinsubmit(@RequestParam("userid") userid : String,
                    @RequestParam("userpw") userpw : String,
-                   @RequestParam("email") email : String): JSONObject {
-        return service.joinsubmit(userid, userpw, email)
+                   @RequestParam("useremail") useremail : String): JSONObject {
+        return service.joinsubmit(userid, userpw, useremail)
     }
 
 

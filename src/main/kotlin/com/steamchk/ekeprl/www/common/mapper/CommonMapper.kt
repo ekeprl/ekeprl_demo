@@ -17,6 +17,6 @@ interface CommonMapper {
     fun joinduplicateChk(userid : String) : Int
 
     //회원등록
-    fun joinsubmit(userid: String, userpw: String, email: String)
+    fun joinsubmit(userid: String, userpw: String, useremail: String)
 
 }

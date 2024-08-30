@@ -8,17 +8,17 @@
 <body>
 <div class="login-container">
     <h1>Login</h1>
-    <form method="post" onsubmit="return false;">
+    <form id="loginForm" class="loginForm" onsubmit="return false;">
         <div class="form-group">
-            <label for="username">ID</label>
-            <input type="text" class="form-control" id="username" placeholder="ID를 입력해 주세요">
+            <label for="userid">ID</label>
+            <input type="text" class="form-control" id="userid" name="userid" placeholder="ID를 입력해 주세요">
         </div>
         <div class="form-group">
-            <label for="password">PW</label>
-            <input type="password" class="form-control" id="password" placeholder="PW를 입력해 주세요">
+            <label for="userpw">PW</label>
+            <input type="password" class="form-control" id="userpw" name="userpw" placeholder="PW를 입력해 주세요">
         </div>
         <div class="button-container">
-            <button type="submit" class="btn btn-primary btn-block">로그인</button>
+            <button type="button" class="btn btn-primary btn-block" id="loginBtn">로그인</button>
             <button type="button" class="btn btn-secondary btn-block" id="joinBtn">회원가입</button>
         </div>
     </form>

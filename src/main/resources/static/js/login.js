@@ -6,6 +6,12 @@ doc.addEventListener('DOMContentLoaded', function(){
 });
 
 
+
+var userid = doc.getElementById("userid");
+var userpw = doc.getElementById("userpw");
+
+
+
     var javascriptFun = {
 
         initHtml : function () {
@@ -14,37 +20,42 @@ doc.addEventListener('DOMContentLoaded', function(){
                 javascriptFun.toJoin();
             });
 
+            doc.getElementById('loginBtn').addEventListener("click",function (){
+                javascriptFun.loginChk();
+            });
+
         },
 
 
         toJoin: function() {
-           /* var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/join', true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    doc.location.href = "/join";
-                }
-            };
-            xhr.send();*/
 
             var form = document.createElement('form');
             form.method = 'POST';
-            form.action = '/join'; // The URL to which the form will be submitted
+            form.action = '/join';
 
-            // Optionally add hidden inputs if you need to send additional data
-            // var input = document.createElement('input');
-            // input.type = 'hidden';
-            // input.name = 'key';
-            // input.value = 'value';
-            // form.appendChild(input);
-
-            // Append the form to the body
             document.body.appendChild(form);
 
-            // Submit the form
             form.submit();
-        }
+        },
 
 
+        loginChk: function () {
+
+            userid.value = userid.value.trim();
+
+            if(userid.value.length < 1) {
+                userid.focus();
+                alert("아이디를 입력해주세요");
+            }else if(userpw.value.length < 1) {
+                userpw.focus();
+                alert("비밀번호를 입력해주세요");
+            }else {
+                console.log("111111111 : " + userid.value);
+                var loginForm = doc.getElementById('loginForm');
+                loginForm.method="POST";
+                loginForm.action='/login-try';
+                loginForm.submit();
+            }
+        },
 
 }
