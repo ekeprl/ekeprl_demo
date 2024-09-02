@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -25,9 +25,21 @@
 </div>
 
 <script defer type="text/javascript" charset="UTF-8" src="/js/login.js"></script>
-<script defer th:inline="javascript" type="text/javascript" charset="UTF-8"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script defer th:inline="javascript" type="text/javascript" charset="UTF-8">
+    /* <![CDATA[ */
+    var ERROR = /*[[ ${ERROR} ]]*/;
+    var MESSAGE = /*[[ ${MESSAGE} ]]*/;
+
+    if(ERROR !== null){
+        alert(ERROR);
+    }else if(MESSAGE !== null){
+        alert(MESSAGE);
+    }
+    /* ]]> */
+</script>
+
 </body>
 </html>

@@ -38,20 +38,21 @@ class CommonService {
 
         try {
             val userinfo = mapper.getuserinfo(userid)
-            logger.info("확인123213 : " + userinfo!!.userpw);
-            if(userinfo == null) {
-            redirectAttributes.addFlashAttribute("MESSAGE", "계정 정보가 존재 하지 않습니다.")
-            }else if(userinfo.userpw != userpw){
-            logger.info("DB에서 가져온 비밀번호: ${userinfo.userpw}, 입력한 비밀번호: $userpw")
-            redirectAttributes.addFlashAttribute("ERROR", "비밀번호가 일치 하지 않습니다.")
-            }else{
-            result = "redirect:/main"
+
+
+            if (userinfo != null) {
+                if(userinfo.userpw != userpw){
+                    redirectAttributes.addFlashAttribute("ERROR", "비밀번호가 일치 하지 않습니다.")
+                }else{
+                    result = "redirect:/main"
+                }
+            } else{
+                redirectAttributes.addFlashAttribute("MESSAGE", "존재하지 않는 사용자입니다.")
             }
         }catch (e : Exception) {
             logger.error("ERROR", e)
         }
         return result
-
 
     }
 

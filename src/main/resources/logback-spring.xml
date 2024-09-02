@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+    <!-- 콘솔 출력 앱렌더 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- root logger 설정 -->
+    <!-- root 로거 설정: 필요에 따라 INFO나 DEBUG로 조정 -->
     <root level="DEBUG">
         <appender-ref ref="CONSOLE" />
     </root>
 
-    <root level="DEBUG">
-        <appender-ref ref="STDOUT"/>
-    </root>
-
-    <root level="INFO">
-        <appender-ref ref="CONSOLE" />
-    </root>
-
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </root>
-
-
-    <!-- 각 패키지에 대한 logger 설정 -->
+    <!-- 각 패키지에 대한 로거 설정 -->
     <logger name="jdbc" level="OFF" />
     <logger name="jdbc.audit" level="OFF" />
     <logger name="jdbc.sqlonly" level="OFF" />
@@ -39,6 +27,5 @@
     <logger name="com.zaxxer.hikari" level="WARN" additivity="false" />
     <logger name="org.mybatis.spring" level="WARN" additivity="false" />
     <logger name="org.springframework" level="WARN" additivity="false" />
-
 
 </configuration>

@@ -50,7 +50,6 @@ var userpw = doc.getElementById("userpw");
                 userpw.focus();
                 alert("비밀번호를 입력해주세요");
             }else {
-                console.log("111111111 : " + userid.value);
                 var loginForm = doc.getElementById('loginForm');
                 loginForm.method="POST";
                 loginForm.action='/login-try';

@@ -27,8 +27,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect") // Thymeleaf 의존성 추가
 
-    implementation(kotlin("stdlib"))
-
     // Tomcat 제외
     implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
@@ -47,6 +45,10 @@ dependencies {
 
     //json
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
+
+    //log4j2
+    //implementation ("ch.qos.logback:logback-classic:1.4.12")
+    /*testImplementation("ch.qos.logback:logback-classic:1.4.12")*/
 }
 
 kotlin {
@@ -57,4 +59,16 @@ kotlin {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.withType<Copy> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs("src/main/resources", "src/main/kotlin")
+        }
+    }
 }
