@@ -2,6 +2,8 @@ package com.steamchk.ekeprl.www
 
 
 import com.steamchk.ekeprl.www.common.service.CommonService
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import jakarta.servlet.http.HttpSession
 import org.apache.ibatis.annotations.Param
 import org.json.simple.JSONObject
@@ -26,14 +28,22 @@ class WebController() {
     @Autowired
     lateinit var service: CommonService
 
-    //메인페이지 이동
 
+    //로그아웃 기능
+    @RequestMapping(value = [("logout")])
+    @Throws(Exception::class)
+    fun logout(request: HttpServletRequest, response: HttpServletResponse, redirectAttributes: RedirectAttributes): String {
+        return service.logout(request, response ,redirectAttributes)
+    }
+
+
+
+    //메인페이지 이동
     @RequestMapping(value = [("/main")])
     @Throws(Exception::class)
     fun mainPage(): String {
     return "main"
     }
-
 
 
     //로그인 페이지

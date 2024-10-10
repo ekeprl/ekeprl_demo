@@ -2,49 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main</title>
+    <title>Steam Info Hub</title>
     <link rel="stylesheet" href="/css/main.css">
-</head><body>
+</head>
+<body>
 <header>
-    <h1>Game Info Hub</h1>
+    <div class="header-left">
+        <h1>Steam Info Hub</h1>
+    </div>
+    <div class="header-center">
+        <input type="text" placeholder="Search for games..." class="search-bar">
+    </div>
+    <div class="header-right">
+        <a href="#" class="header-btn">My Page</a>
+        <a href="/logout" class="header-btn">로그아웃</a>
+    </div>
 </header>
 
 <nav>
     <a href="#">Home</a>
-    <a href="#">Latest News</a>
-    <a href="#">Popular Games</a>
+    <a href="#">Store</a>
+    <a href="#">News</a>
+    <a href="#">Top Games</a>
     <a href="#">Community</a>
-    <a href="#">About</a>
+    <a href="#">Sales</a>
+    <a href="#">Support</a>
 </nav>
 
-<div class="container">
-    <div class="section">
-        <h2>Game Introduction</h2>
-        <p>Discover the latest and greatest games in the industry. From action-packed adventures to strategic
-            simulations, explore a world of gaming like never before.</p>
+<div class="main-content">
+    <div class="left-section">
+        <img src="https://via.placeholder.com/600x400" alt="Featured Game" class="featured-image">
     </div>
-
-    <div class="section">
-        <h2>Latest News</h2>
-        <p>Stay up to date with the latest news and updates from the gaming world. Whether it’s new releases,
-            updates, or industry trends, we’ve got you covered.</p>
-    </div>
-
-    <div class="section">
-        <h2>Popular Games</h2>
-        <p>Check out our list of the most popular games right now. See what’s trending and join the community in
-            playing the hottest games of the season.</p>
-    </div>
-
-    <div class="section">
-        <h2>Community</h2>
-        <p>Join our vibrant community of gamers. Discuss strategies, share experiences, and make new friends who
-            share your passion for gaming.</p>
+    <div class="right-section">
+        <div class="promotion">
+            <h2>Special Promotion</h2>
+            <p>Don't miss our exclusive deals on top games! Up to 75% off for a limited time.</p>
+            <a href="#" class="promo-btn">Shop Now</a>
+        </div>
     </div>
 </div>
 
+<div class="board-section">
+    <h2>Community Board</h2>
+    <ul class="board-list">
+        <li><a href="#">Game Discussion: Best strategies for the latest games</a></li>
+        <li><a href="#">Upcoming Releases: What's hot in September 2024</a></li>
+        <li><a href="#">Tips and Tricks: How to get better at FPS games</a></li>
+        <li><a href="#">Community Events: Join the next big tournament</a></li>
+        <li><a href="#">Technical Support: Solutions for common issues</a></li>
+    </ul>
+</div>
+
 <footer>
-    &copy; 2024 Game Info Hub. All Rights Reserved.
+    &copy; 2024 Steam Info Hub. All Rights Reserved. Not affiliated with Valve Corporation.
 </footer>
 
 <script defer type="text/javascript" charset="UTF-8" src="/js/main.js"></script>
@@ -53,5 +63,4 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

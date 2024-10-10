@@ -1,16 +1,19 @@
 package com.steamchk.ekeprl.www.common.service
 
 import com.steamchk.ekeprl.www.common.mapper.CommonMapper
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import jakarta.servlet.http.HttpSession
 import org.apache.ibatis.annotations.Param
 import org.json.simple.JSONObject
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.ui.Model
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
-import kotlin.jvm.Throws
 
 @Service
 
@@ -19,7 +22,32 @@ class CommonService {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Autowired
+    private lateinit var session : HttpSession
+
+    @Autowired
     private lateinit var mapper : CommonMapper
+
+    //로그아웃
+    @Throws(Exception::class)
+    fun logout(request: HttpServletRequest, response: HttpServletResponse, redirectAttributes: RedirectAttributes) :String{
+        try {
+            session = request.getSession(false)
+            session.invalidate()
+
+            if(SecurityContextHolder.getContext().authentication !== null){
+                SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().authentication)
+            }
+
+            SecurityContextHolder.clearContext()
+            SecurityContextHolder.getContext().authentication = null
+
+            redirectAttributes.addFlashAttribute("MESSAGE", "로그아웃 처리되었습니다.")
+        }catch (ex : Exception){
+            logger.error("ERROR", ex)
+        }
+        return "/login"
+    }
+
 
 
     //로그인 페이지 반환

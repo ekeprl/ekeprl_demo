@@ -52,7 +52,7 @@ var userpw = doc.getElementById("userpw");
             }else {
                 var loginForm = doc.getElementById('loginForm');
                 loginForm.method="POST";
-                loginForm.action='/login-try';
+                loginForm.action='/login-security-try';
                 loginForm.submit();
             }
         },

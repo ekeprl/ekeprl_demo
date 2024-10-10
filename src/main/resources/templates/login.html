@@ -30,8 +30,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script defer th:inline="javascript" type="text/javascript" charset="UTF-8">
     /* <![CDATA[ */
-    var ERROR = /*[[ ${ERROR} ]]*/;
-    var MESSAGE = /*[[ ${MESSAGE} ]]*/;
+    'use strict';
+
+    const ERROR = /*[[ ${ERROR} ]]*/;
+    const MESSAGE = /*[[ ${MESSAGE} ]]*/;
+
 
     if(ERROR !== null){
         alert(ERROR);
